@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/footstep9.wav-9c266f10a646d053a26e4ac0b9d1771d.sample"
+
+[deps]
+
+source_file="res://Advanced-Movement-System-Godot-853b4f54c6209f175e97659aa6264b82686cb5c5/AMSG_Examples/Character/footstep_sound/footstep9.wav"
+dest_files=[ "res://.import/footstep9.wav-9c266f10a646d053a26e4ac0b9d1771d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
