@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Pivot.gd" type="Script" id=2]
 [ext_resource path="res://Player2.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CubeMesh" id=2]
@@ -26,6 +27,7 @@ shape = SubResource( 1 )
 
 [node name="Pivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.967405, 0.253235, 0, -0.253235, 0.967405, 0, 0.802274, 0.381101 )
+script = ExtResource( 2 )
 
 [node name="Camera" type="Camera" parent="Pivot"]
 transform = Transform( 0.836567, 0, 0, 0, 0.742111, 0.386154, 0, -0.386154, 0.742111, 0, 1.13072, 3.54481 )
@@ -39,5 +41,6 @@ player_num = 2
 
 [node name="RotationTimer" type="Timer" parent="."]
 
+[connection signal="player_pos" from="." to="Pivot" method="_move_cam"]
 [connection signal="opp_hit" from="Player" to="Player2" method="_hit"]
 [connection signal="opp_hit" from="Player2" to="Player" method="_hit"]
