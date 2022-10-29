@@ -10,8 +10,8 @@ var scale_z = 0.75
 func _process(delta):
 	#transform.basis = Basis()
 	match_box()
-	self.rotate(Vector3(1, 0, 0), ROT_SPEED)
-	self.rotate(Vector3(0, 0, 1), ROT_SPEED)
+	#self.rotate(Vector3(1, 0, 0), ROT_SPEED)
+	#self.rotate(Vector3(0, 0, 1), ROT_SPEED)
 	
 func match_box():
 	

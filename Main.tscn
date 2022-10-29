@@ -1,30 +1,61 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://StaticBody.gd" type="Script" id=2]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player2.tscn" type="PackedScene" id=4]
 
 [sub_resource type="BoxShape" id=1]
 
 [sub_resource type="CubeMesh" id=2]
 
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.843137, 0.0588235, 0.0588235, 1 )
+
 [node name="Main" type="Spatial"]
 transform = Transform( 1.19536, 0, 0, 0, 1.19536, 0, 0, 0, 1.19536, 0, 0, 0 )
 script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "To protect a branch:
+
+On the top bar, select Main menu > Projects and find your project.
+On the left sidebar, select Settings > Repository.
+Expand Protected branches.
+From the Branch dropdown list, select the branch you want to protect.
+From the Allowed to merge list, select a role, or group that can merge into this branch. In GitLab Premium, you can also add users.
+From the Allowed to push list, select a role, group, or user that can push to this branch. In GitLab Premium, you can also add users.
+Select Protect."
+}
 
 [node name="StaticBody" type="StaticBody" parent="."]
-transform = Transform( 0.719023, 0, 0, 0, 2.59468, 0, 0, 0, 0.789505, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.267652, 0 )
+collision_layer = 4
+collision_mask = 4
 script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-transform = Transform( 1.90326, 0, 0, 0, 0.170078, 0, 0, 0, 1.8655, 0, 0, 0 )
+transform = Transform( 25, 0, 0, 0, 0.507, 0, 0, 0, 25, 0, 0, 0 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
-transform = Transform( 2.02711, 0, 0, 0, 0.170072, 0, 0, 0, 1.84814, 0, 0, 0 )
+transform = Transform( 25, 0, 0, 0, 0.0263989, 0, 0, 0, 25, 0, 0.159868, 0 )
+generate_lightmap = false
 mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="StaticBody/MeshInstance"]
+transform = Transform( 0.0324409, 0, 0, 0, 2.38278, 4.30325, 0, -0.0177544, 0.00983092, 0, 125.039, 0.465818 )
+light_energy = 0.706
+shadow_enabled = true
 
 [node name="Pivot" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.967405, 0.253235, 0, -0.253235, 0.967405, 0, 0.802274, 0.381101 )
+transform = Transform( -0.0118043, 0.188941, -0.981919, 0.00210225, 0.98199, 0.188929, 0.999928, 0.000165947, -0.0119889, 0, 0.802274, 0.381101 )
 
 [node name="Camera" type="Camera" parent="Pivot"]
-transform = Transform( 0.836567, 0, 0, 0, 0.742111, 0.386154, 0, -0.386154, 0.742111, 0, 1.13072, 3.54481 )
+transform = Transform( 0.836568, 0, 0, 0, 0.742112, 0.386155, 0, -0.386155, 0.742112, 0, 14.3932, 30.8993 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.738938, 4.43045, -11.5894 )
+
+[node name="Player2" parent="." instance=ExtResource( 4 )]
+transform = Transform( -0.999996, 0, -0.00286236, 0, 1, 0, 0.00286236, 0, -0.999996, 0.275499, 4.69249, 12.1584 )
