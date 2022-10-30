@@ -12,30 +12,33 @@ func getBall():
 
 func _physics_process(delta):
 	
-	#playernumbers for different key inputs and for winner
+	# playernumbers for different key inputs and for winner
 	var player1 = player_num == 1
 	var player2 = player_num == 2
 	
-	#allows gravity of the rigid body to be variable by the map
+	# allows gravity of the rigid body to be variable by the map
 	$RigidBody.gravity_scale = gravity
 	
-	# Input handling
+	# input handling
 	var right = Vector3(0, 0.1, 0)
 	
 	var forward = Vector3(sin($PhysPlayer.getBodyAngle().y), 0 ,cos($PhysPlayer.getBodyAngle().y))
 	$RigidBody.add_central_force(forward*0.001)
 	var right1 = Input.is_action_pressed("right_1")
 	var right2 = Input.is_action_pressed("right_2")
+	
 	if right1 and player1 or right2 and player2:
 		$PhysPlayer.setBodyAngle($PhysPlayer.getBodyAngle() - right)
 	
 	var left1 = Input.is_action_pressed("left_1")
 	var left2 = Input.is_action_pressed("left_2")
+	
 	if player1 and left1 or player2 and left2:
 		$PhysPlayer.setBodyAngle($PhysPlayer.getBodyAngle() + right)
 		
 	var up1 = Input.is_action_pressed("up_1")
 	var up2 = Input.is_action_pressed("up_2")
+	
 	if player1 and up1 or player2 and up2:
 		forward = Vector3(sin($PhysPlayer.getBodyAngle().y), 0 ,cos($PhysPlayer.getBodyAngle().y))
 		$RigidBody.add_central_force(forward*speed)
@@ -44,6 +47,7 @@ func _physics_process(delta):
 	
 	var down1 = Input.is_action_pressed("down_1")
 	var down2 = Input.is_action_pressed("down_2")
+	
 	if player1 and down1 or player2 and down2:
 		forward = Vector3(sin($PhysPlayer.getBodyAngle().y), 0 ,cos($PhysPlayer.getBodyAngle().y))
 		$RigidBody.add_central_force(forward*-speed)

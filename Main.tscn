@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://HUD.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://fonts/kirifont/Kirifont.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Camera.gd" type="Script" id=5]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/sfx/Gravity Gauntlet - Main Theme.mp3" type="AudioStream" id=7]
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 2, 0.5, 6 )
@@ -180,6 +181,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Deathzone"]
 shape = SubResource( 4 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+autoplay = true
 
 [connection signal="player_pos" from="." to="Camera" method="_on_Main_player_pos"]
 [connection signal="timeout" from="RotationTimer" to="." method="_on_RotationTimer_timeout"]
