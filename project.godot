@@ -8,6 +8,58 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "CharacterMovementComponent",
+"class": "AI",
+"language": "GDScript",
+"path": "res://Advanced-Movement-System-Godot-853b4f54c6209f175e97659aa6264b82686cb5c5/addons/AMSG/AI/AI_Base.gd"
+}, {
+"base": "AnimationTree",
+"class": "AnimBlend",
+"language": "GDScript",
+"path": "res://Advanced-Movement-System-Godot-853b4f54c6209f175e97659aa6264b82686cb5c5/addons/AMSG/Components/AnimationBlend.gd"
+}, {
+"base": "Node",
+"class": "CameraComponent",
+"language": "GDScript",
+"path": "res://Advanced-Movement-System-Godot-853b4f54c6209f175e97659aa6264b82686cb5c5/addons/AMSG/Components/CameraComponent.gd"
+}, {
+"base": "Node",
+"class": "CharacterMovementComponent",
+"language": "GDScript",
+"path": "res://Advanced-Movement-System-Godot-853b4f54c6209f175e97659aa6264b82686cb5c5/addons/AMSG/Components/CharacterMovementComponent.gd"
+}, {
+"base": "Node",
+"class": "Interactable",
+"language": "GDScript",
+"path": "res://Advanced-Movement-System-Godot-853b4f54c6209f175e97659aa6264b82686cb5c5/addons/AMSG/Interactable/Interactable.gd"
+}, {
+"base": "Node",
+"class": "MotionWarping",
+"language": "GDScript",
+"path": "res://Advanced-Movement-System-Godot-853b4f54c6209f175e97659aa6264b82686cb5c5/addons/PoseWarping/MotionWarping.gd"
+}, {
+"base": "Node",
+"class": "PlayerNetworkingComponent",
+"language": "GDScript",
+"path": "res://Advanced-Movement-System-Godot-853b4f54c6209f175e97659aa6264b82686cb5c5/addons/AMSG/Components/PlayerNetworkingComponent.gd"
+}, {
+"base": "Node",
+"class": "pose_warping",
+"language": "GDScript",
+"path": "res://Advanced-Movement-System-Godot-853b4f54c6209f175e97659aa6264b82686cb5c5/addons/PoseWarping/PoseWarpingFunctions.gd"
+} ]
+_global_script_class_icons={
+"AI": "",
+"AnimBlend": "",
+"CameraComponent": "",
+"CharacterMovementComponent": "",
+"Interactable": "",
+"MotionWarping": "",
+"PlayerNetworkingComponent": "",
+"pose_warping": ""
+}
+
 [application]
 
 config/name="Gravity Gauntlet"
