@@ -24,6 +24,11 @@ onready var player2 = get_node("Player2")
 var player1_scene = preload("res://Player.tscn")
 var player2_scene = preload("res://Player2.tscn")
 
+onready var currentMap = get_node("Map/Walls")
+var map1 = preload("res://Map1.tscn")
+var house = preload("res://HouseMap.tscn")
+var switchMap = true
+
 #signal used for camera
 signal player_pos(p1_pos, p2_pos)
 
@@ -33,7 +38,7 @@ signal game_over
 func _process(delta):
 	
 	#emit_signal("player_pos", player1.translation, player2.translation)
-	var rotation = $Walls.rotation_degrees.z as int
+	var rotation = currentMap.rotation_degrees.z as int
 	$Camera._move_cam(player1.getPhysPlayer().getBodyPosition(), player2.getPhysPlayer().getBodyPosition())
 	
 	if score1 == play_to or score2 == play_to:
@@ -135,7 +140,7 @@ func _on_Deathzone_body_entered(body):
 	counter = 1
 	round_num += 1
 	
-	$Walls.rotation = Vector3(0, 0, 0)
+	currentMap.rotation = Vector3(0, 0, 0)
 	$HUD/Message.visible = true
 	$HUD/Message.text = "Round " + str(round_num)
 	$RotationTimer.stop()
@@ -167,3 +172,18 @@ func _on_ExclaimTimer_timeout():
 func _on_Start_Buffer_timeout():
 	start = true
 	$RotationTimer.start()
+
+func _on_MapToggle_pressed():
+	currentMap.queue_free()
+	var newMap
+	if switchMap:
+		switchMap = not switchMap
+		newMap = house.instance()
+	else:
+		switchMap = not switchMap
+		newMap = map1.instance()
+
+	currentMap = newMap
+	$Map.add_child(newMap)
+	
+	
