@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://HUD.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Camera.gd" type="Script" id=5]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sfx/Gravity Gauntlet - Main Theme.mp3" type="AudioStream" id=7]
+[ext_resource path="res://Exclamation.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 2, 0.5, 6 )
@@ -20,17 +21,17 @@ extents = Vector3( 10, 0.05, 10 )
 [node name="Main" type="Spatial"]
 transform = Transform( 1.19536, 0, 0, 0, 1.19536, 0, 0, 0, 1.19536, 0, 0, 0 )
 script = ExtResource( 1 )
+exclaim_scene = ExtResource( 8 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.836568, 0, 0, 0, 0.836568, 0, 0, 0, 0.836568, 0, 1.60688, 0.172068 )
-visible = false
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
 
 [node name="Player2" parent="." instance=ExtResource( 3 )]
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.836568, 0, 0, 0, 0.758188, 0.353549, 0, -0.353549, 0.758188, 0, 3, 8 )
+transform = Transform( 0.836568, 0, 0, 0, 0.758188, 0.353549, 0, -0.353549, 0.758188, 0, 0.0419828, 8 )
 current = true
 script = ExtResource( 5 )
 
@@ -234,6 +235,10 @@ stream = ExtResource( 7 )
 volume_db = -4.333
 autoplay = true
 
+
+[node name="ExclaimTimer" type="Timer" parent="."]
+wait_time = 0.3
+
 [connection signal="game_over" from="." to="HUD" method="_on_Main_game_over"]
 [connection signal="player_pos" from="." to="Camera" method="_on_Main_player_pos"]
 [connection signal="timeout" from="RotationTimer" to="." method="_on_RotationTimer_timeout"]
@@ -244,3 +249,4 @@ autoplay = true
 [connection signal="timeout" from="HUD/Start_Buffer" to="HUD" method="_on_Start_Buffer_timeout"]
 [connection signal="timeout" from="HUD/Clear_Text" to="HUD" method="_on_Clear_Text_timeout"]
 [connection signal="body_entered" from="Deathzone" to="." method="_on_Deathzone_body_entered"]
+[connection signal="timeout" from="ExclaimTimer" to="." method="_on_ExclaimTimer_timeout"]

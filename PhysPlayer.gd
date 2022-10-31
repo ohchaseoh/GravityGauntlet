@@ -1,4 +1,5 @@
 extends Spatial
+signal hit(hitter)
 
 func setBodyPosition(position):
 	$body.global_transform.origin = position
@@ -14,10 +15,12 @@ func getBodyAngle():
 
 func _on_HandRCollision_body_entered(body):
 	body.get_owner().get_owner().getBall().add_central_force($hand_r.linear_velocity * 30)
+	emit_signal("hit", $body.get_owner().get_owner().player_num)
 	punch_sound()
 	print("Hit")
 
 func _on_HandLCollision_body_entered(body):
+	emit_signal("hit", $body.get_owner().get_owner().player_num)
 	body.get_owner().get_owner().getBall().add_central_force($hand_r.linear_velocity * 30)
 	punch_sound()
 	print("Hit")

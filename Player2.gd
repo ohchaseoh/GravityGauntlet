@@ -6,6 +6,7 @@ var hand_select = false;
 var active_hand;
 var gravity = 1
 var start = false
+
 export var player_num = 2
 
 func getBall():
@@ -66,5 +67,6 @@ func _physics_process(delta):
 	# Set the position of the body
 	var offset = Vector3(0,0.3,0)
 	$PhysPlayer.setBodyPosition($RigidBody.global_transform.origin + offset)
-	
-	
+
+func _ready():
+	$PhysPlayer.connect("hit", self.get_parent(), "_disp_ow")

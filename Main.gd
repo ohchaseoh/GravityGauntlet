@@ -6,6 +6,10 @@ var direction = Vector3.FORWARD
 var switch = false
 var counter = 1
 var rotate = false
+var exclaimCD = false
+onready var player1 = get_node("Player")
+onready var player2 = get_node("Player2")
+export (PackedScene) var exclaim_scene
 
 var start = false #can the players move
 
@@ -31,6 +35,7 @@ func _process(delta):
 	
 	#emit_signal("player_pos", player1.translation, player2.translation)
 	var rotation = $Walls.rotation_degrees.z as int
+	$Camera._move_cam($Player/PhysPlayer.getBodyPosition(), $Player2/PhysPlayer.getBodyPosition())
 	
 	if score1 == 3 or score2 == 3:
 		if score1 == 3:
@@ -98,6 +103,25 @@ func _on_RotationTimer_timeout():
 	
 #resetting when a player falls off the map
 func _on_Deathzone_body_entered(body):
+	pass
+	get_tree().reload_current_scene()
+
+func _disp_ow(hitter):
+	if !exclaimCD:
+		$ExclaimTimer.start()
+		var exclamation = exclaim_scene.instance()
+		if(hitter == 1):
+			exclamation.translate($Player2/PhysPlayer.getBodyPosition())
+		else:
+			exclamation.translate($Player/PhysPlayer.getBodyPosition())
+		exclamation.translate(Vector3(0, 1, 0))
+		add_child(exclamation)
+		exclaimCD = true
+	else:
+		pass
+
+func _on_ExclaimTimer_timeout():
+	exclaimCD = false
 	
 	start = false
 	
@@ -139,5 +163,3 @@ func _on_Deathzone_body_entered(body):
 func _on_Start_Buffer_timeout():
 	start = true
 	$RotationTimer.start()
-
-
