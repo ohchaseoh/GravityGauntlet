@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/human_clapping_8_people.mp3-fd1114f573c71ac7db6ecb87eb10e9e4.mp3str"
+
+[deps]
+
+source_file="res://assets/sfx/human_clapping_8_people.mp3"
+dest_files=[ "res://.import/human_clapping_8_people.mp3-fd1114f573c71ac7db6ecb87eb10e9e4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

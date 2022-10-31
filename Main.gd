@@ -16,7 +16,7 @@ var score1 = 0
 var score2 = 0
 var round_num = 1
 var winner
-var play_to = 5
+var play_to = 3
 
 #player nodes
 onready var player1 = get_node("Player")
@@ -39,8 +39,10 @@ func _process(delta):
 	if score1 == play_to or score2 == play_to:
 		if score1 == play_to:
 			winner = "one"
+			$StageSFX.play()
 		else:
 			winner = "two"
+			$StageSFX.play()
 		start = false
 		$HUD/Timer.stop()
 		$RotationTimer.stop()
