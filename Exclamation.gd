@@ -5,10 +5,9 @@ extends Spatial
 var fade = false
 # var b = "text"
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var exclamations = ["ow", "ouch", "yeowch", "stop", "owie", "yamete", "help", "oof"]
+	var exclamations = ["ow", "ouch", "yeowch", "stop", "owie", "yamete", "help", "oof", "pow", "splat", "wham"]
 	var randExclaim = exclamations[randi()% exclamations.size()]
 	$Sprite3D/Viewport/OwLabel.text = randExclaim
 	$OwTimer.start()
