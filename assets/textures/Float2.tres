@@ -1,0 +1,10 @@
+[gd_resource type="TextMesh" load_steps=3 format=2]
+
+[ext_resource path="res://assets/textures/2_Orange/Orange.tres" type="Material" id=1]
+[ext_resource path="res://fonts/kirifont/Kirifont.tres" type="DynamicFont" id=2]
+
+[resource]
+material = ExtResource( 1 )
+text = "P2"
+font = ExtResource( 2 )
+uppercase = true
