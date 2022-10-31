@@ -11,6 +11,9 @@ var start = false
 func getBall():
 	return $RigidBody
 
+func getPhysPlayer():
+	return $PhysPlayer
+
 func _physics_process(delta):
 	
 	if start:
