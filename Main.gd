@@ -16,6 +16,7 @@ var score1 = 0
 var score2 = 0
 var round_num = 1
 var winner
+var play_to = 5
 
 #player nodes
 onready var player1 = get_node("Player")
@@ -35,8 +36,8 @@ func _process(delta):
 	var rotation = $Walls.rotation_degrees.z as int
 	$Camera._move_cam(player1.getPhysPlayer().getBodyPosition(), player2.getPhysPlayer().getBodyPosition())
 	
-	if score1 == 3 or score2 == 3:
-		if score1 == 3:
+	if score1 == play_to or score2 == play_to:
+		if score1 == play_to:
 			winner = "one"
 		else:
 			winner = "two"
@@ -60,37 +61,42 @@ func _process(delta):
 		else:
 			player1.gravity = 1
 			player2.gravity = 1
+			
 		if switch:
 			$HUD/Label.text = "Gravity OFF"
 			$RotationTimer.paused = true
 			$HUD/Timer.paused = true
+			
 			if rotation < 360:
 				_rotateDownLeft()
+				
 			if rotation == 90 and counter == 1:
 				counter = 2
 				switch = false
 				$RotationTimer.paused = false
 				$HUD/Timer.paused = false
 				rotate = false
+				
 			if rotation == 179 and counter == 2:
 				counter = 3
 				switch = false
 				rotate = false
 				$RotationTimer.paused = false
 				$HUD/Timer.paused = false
+				
 			if rotation == -90 and counter == 3:
 				counter = 4
 				switch = false
 				rotate = false
 				$RotationTimer.paused = false
 				$HUD/Timer.paused = false
+				
 			if rotation == 0 and counter == 4:
 				counter = 1
 				switch = false
 				rotate = false
 				$RotationTimer.paused = false
 				$HUD/Timer.paused = false
-		
 
 func _rotateDownLeft():
 	$Walls.rotate(Vector3(0, 0, 1), ROT_SPEED)
@@ -107,7 +113,7 @@ func _on_Deathzone_body_entered(body):
 	if body.get_owner().get_owner().player_num == 2:
 		score1 +=1
 		$HUD.score1 +=1
-	else:
+	elif body.get_owner().get_owner().player_num == 1:
 		score2 +=1
 		$HUD.score2 +=1
 	
@@ -129,23 +135,24 @@ func _on_Deathzone_body_entered(body):
 	
 	$Walls.rotation = Vector3(0, 0, 0)
 	$HUD/Message.visible = true
-	$HUD/Message.text = "Round " +str(round_num)
+	$HUD/Message.text = "Round " + str(round_num)
 	$RotationTimer.stop()
 	$HUD.counter = 10
 	$HUD/Timer.stop()
 	
-	
 	$HUD/Start_Buffer.start()
-	
 
 func _disp_ow(hitter):
+	
 	if !exclaimCD:
 		$ExclaimTimer.start()
 		var exclamation = exclaim_scene.instance()
+		
 		if(hitter == 1):
 			exclamation.translate(player2.getPhysPlayer().getBodyPosition())
 		else:
 			exclamation.translate(player1.getPhysPlayer().getBodyPosition())
+			
 		exclamation.translate(Vector3(0, 1, 0))
 		add_child(exclamation)
 		exclaimCD = true

@@ -42,3 +42,4 @@ func punch_sound():
 
 func _on_AudioStreamPlayer_finished():
 	$SFXPhysPlayer.stop()
+
