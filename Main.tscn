@@ -184,6 +184,7 @@ shape = SubResource( 4 )
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+volume_db = -4.333
 autoplay = true
 
 [connection signal="player_pos" from="." to="Camera" method="_on_Main_player_pos"]
