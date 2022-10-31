@@ -20,13 +20,13 @@ func _on_Timer_timeout():
 		counter = 10
 	counter -=1
 
-
 func _on_Button_pressed():
 	if game_over:
 		get_tree().reload_current_scene()
 	$Message.text = "ROUND 1"
 	$Start_Buffer.start()
 	$Button.visible = false
+	$MapToggle.visible = false
 	
 func _on_Clear_Text_timeout():
 	$Message.visible = false
@@ -36,9 +36,7 @@ func _on_Start_Buffer_timeout():
 	$Clear_Text.start()
 	$Timer.start()
 
-
 func _on_Main_game_over():
 	$Button.text = "Play Again"
 	$Button.visible = true
-	
 	game_over = true
