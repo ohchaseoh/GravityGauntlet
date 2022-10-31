@@ -31,6 +31,7 @@ script = ExtResource( 4 )
 
 [node name="SFXPhysPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+volume_db = -2.0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.41536, 0.00160456 )
