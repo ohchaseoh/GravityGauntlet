@@ -1,10 +1,9 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://assets/phys_player_upparm_blue.glb" type="PackedScene" id=1]
-[ext_resource path="res://assets/phys_player_body_blue.glb" type="PackedScene" id=2]
-[ext_resource path="res://assets/phys_player_forearm_blue.glb" type="PackedScene" id=3]
+[ext_resource path="res://assets/phys_player_body.glb" type="PackedScene" id=1]
+[ext_resource path="res://assets/phys_player_forearm.glb" type="PackedScene" id=2]
+[ext_resource path="res://assets/phys_player_upparm.glb" type="PackedScene" id=3]
 [ext_resource path="res://PhysPlayer.gd" type="Script" id=4]
-[ext_resource path="res://assets/robohead_blue.glb" type="PackedScene" id=5]
 [ext_resource path="res://assets/smiley.png" type="Texture" id=5]
 [ext_resource path="res://assets/sfx/punch1.tres" type="AudioStream" id=6]
 
@@ -14,6 +13,8 @@ extents = Vector3( 1.5093, 1.84679, 1 )
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 1.41199, 1.73672, 1 )
 
+[sub_resource type="CubeMesh" id=5]
+
 [sub_resource type="BoxShape" id=6]
 
 [sub_resource type="BoxShape" id=3]
@@ -21,12 +22,6 @@ extents = Vector3( 0.917983, 0.398559, 0.348864 )
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.874499, 0.312815, 0.27705 )
-
-[sub_resource type="SpatialMaterial" id=8]
-albedo_color = Color( 0, 0, 1, 1 )
-
-[sub_resource type="CubeMesh" id=5]
-material = SubResource( 8 )
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 1.05296, 1.00535, 0.987462 )
@@ -51,19 +46,24 @@ collision_mask = 2
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16358, 0 )
 shape = SubResource( 2 )
 
+[node name="phys_player_body" parent="body" instance=ExtResource( 1 )]
+
 [node name="head" type="StaticBody" parent="body"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.74793, 0 )
 collision_layer = 2
 collision_mask = 2
 
+[node name="MeshInstance" type="MeshInstance" parent="body/head"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+mesh = SubResource( 5 )
+
 [node name="CollisionShape" type="CollisionShape" parent="body/head"]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 shape = SubResource( 6 )
 
-[node name="robohead_blue" parent="body/head" instance=ExtResource( 5 )]
-transform = Transform( 0.651057, 0, 0, 0, 0.651057, 0, 0, 0, 0.651057, 0, 0, 0 )
-
-[node name="phys_player_body_blue" parent="body" instance=ExtResource( 2 )]
+[node name="Sprite3D" type="Sprite3D" parent="body/head"]
+transform = Transform( 0.805965, 0, 0, 0, 0.720089, 0, 0, 0, 1, -0.0556621, 0, 0.511509 )
+texture = ExtResource( 5 )
 
 [node name="upperarm_l" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.88084, 2.39095, 0.0213131 )
@@ -73,7 +73,7 @@ collision_mask = 2
 [node name="CollisionShape" type="CollisionShape" parent="upperarm_l"]
 shape = SubResource( 3 )
 
-[node name="phys_player_upparm_blue" parent="upperarm_l" instance=ExtResource( 1 )]
+[node name="phys_player_upparm" parent="upperarm_l" instance=ExtResource( 3 )]
 
 [node name="forearm_l" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1689, 2.40215, -0.0114748 )
@@ -83,7 +83,7 @@ collision_mask = 2
 [node name="CollisionShape" type="CollisionShape" parent="forearm_l"]
 shape = SubResource( 4 )
 
-[node name="phys_player_forearm_blue" parent="forearm_l" instance=ExtResource( 3 )]
+[node name="phys_player_forearm" parent="forearm_l" instance=ExtResource( 2 )]
 
 [node name="hand_l" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.98603, 2.38299, -0.0250816 )
@@ -129,7 +129,7 @@ collision_mask = 2
 [node name="CollisionShape" type="CollisionShape" parent="upperarm_r"]
 shape = SubResource( 3 )
 
-[node name="phys_player_upparm_blue" parent="upperarm_r" instance=ExtResource( 1 )]
+[node name="phys_player_upparm" parent="upperarm_r" instance=ExtResource( 3 )]
 
 [node name="forearm_r" type="RigidBody" parent="."]
 transform = Transform( -1, 0.000715645, 0, -0.000715645, -1, 0, 0, 0, 1, -5.40465, 2.41832, -0.0365565 )
@@ -139,7 +139,7 @@ collision_mask = 2
 [node name="CollisionShape" type="CollisionShape" parent="forearm_r"]
 shape = SubResource( 4 )
 
-[node name="phys_player_forearm_blue" parent="forearm_r" instance=ExtResource( 3 )]
+[node name="phys_player_forearm" parent="forearm_r" instance=ExtResource( 2 )]
 
 [node name="hand_r" type="RigidBody" parent="."]
 transform = Transform( -1, 0.000715645, 0, -0.000715645, -1, 0, 0, 0, 1, -7.2218, 2.43618, -0.0501633 )
