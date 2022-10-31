@@ -7,7 +7,6 @@
 [ext_resource path="res://assets/smiley.png" type="Texture" id=5]
 [ext_resource path="res://assets/sfx/punch1.tres" type="AudioStream" id=6]
 
-
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.5093, 1.84679, 1 )
 

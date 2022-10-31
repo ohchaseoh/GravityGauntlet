@@ -1,6 +1,5 @@
 [gd_scene load_steps=14 format=2]
 
-
 [ext_resource path="res://assets/phys_player_body.glb" type="PackedScene" id=1]
 [ext_resource path="res://assets/phys_player_forearm.glb" type="PackedScene" id=2]
 [ext_resource path="res://assets/phys_player_upparm.glb" type="PackedScene" id=3]
@@ -30,7 +29,6 @@ extents = Vector3( 1.05296, 1.00535, 0.987462 )
 [node name="PhysPlayer" type="KinematicBody"]
 script = ExtResource( 4 )
 
-
 [node name="SFXPhysPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -2.0
@@ -51,6 +49,7 @@ shape = SubResource( 2 )
 [node name="head" type="StaticBody" parent="body"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.74793, 0 )
 
+[node name="MeshInstance" type="MeshInstance" parent="body/head"]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.000205278, 0.00732088, 0.000376463 )
 mesh = SubResource( 5 )
 
@@ -69,7 +68,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.88084, 2.39095, 0.0213131 )
 shape = SubResource( 3 )
 
 [node name="phys_player_upparm" parent="upperarm_l" instance=ExtResource( 3 )]
-
 transform = Transform( 1.0023, 0, 0, 0, 1.0023, 0, 0, 0, 1.0023, 0, 0, 0 )
 
 [node name="forearm_l" type="RigidBody" parent="."]
