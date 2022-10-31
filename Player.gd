@@ -84,4 +84,3 @@ func _physics_process(delta):
 	var offset = Vector3(0,0.3,0)
 	$PhysPlayer.setBodyPosition($RigidBody.global_transform.origin + offset)
 	
-	
