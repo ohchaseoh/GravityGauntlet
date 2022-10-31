@@ -41,10 +41,8 @@ current = true
 script = ExtResource( 5 )
 
 [node name="Map" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="Walls" type="Spatial" parent="Map"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="start_platform" type="StaticBody" parent="Map/Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.25, 0 )
