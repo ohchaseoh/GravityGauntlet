@@ -23,6 +23,7 @@ disabled = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.04202, 0 )
 collision_layer = 4
 collision_mask = 4
+gravity_scale = 0.0
 linear_damp = 1.0
 
 [node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
