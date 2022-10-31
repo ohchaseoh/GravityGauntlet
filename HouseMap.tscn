@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/sfx/Gravity Gauntlet - Main Theme.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Camera.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Player2.tscn" type="PackedScene" id=6]
 [ext_resource path="res://fonts/kirifont/Kirifont.tres" type="DynamicFont" id=7]
 [ext_resource path="res://Exclamation.tscn" type="PackedScene" id=8]
+[ext_resource path="res://fonts/kirifont/KiriFont.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://HUD2.gd" type="Script" id=10]
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 2, 0.5, 6 )
@@ -18,7 +20,10 @@ extents = Vector3( 1, 0.25, 3 )
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 10, 0.05, 10 )
 
-[node name="Main" type="Spatial"]
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 9 )
+
+[node name="HouseMap" type="Spatial"]
 transform = Transform( 1.19536, 0, 0, 0, 1.19536, 0, 0, 0, 1.19536, 0, 0, 0 )
 script = ExtResource( 3 )
 exclaim_scene = ExtResource( 8 )
@@ -27,10 +32,10 @@ exclaim_scene = ExtResource( 8 )
 transform = Transform( 0.836568, 0, 0, 0, 0.836568, 0, 0, 0, 0.836568, 0, 1.60688, 0.172068 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 2.09559, -2.16345, 0 )
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 2.096, -2, 0 )
 
 [node name="Player2" parent="." instance=ExtResource( 6 )]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -2.12874, 0, 0 )
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -2.129, -2, 0 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.836568, 0, 0, 0, 0.758188, 0.353549, 0, -0.353549, 0.758188, 0, 0.0419828, 8 )
@@ -225,7 +230,85 @@ autoplay = true
 [node name="ExclaimTimer" type="Timer" parent="."]
 wait_time = 0.3
 
+[node name="HUD2" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 10 )
+
+[node name="Panel" type="Panel" parent="HUD2"]
+anchor_right = 1.0
+margin_bottom = 70.0
+
+[node name="Timer" type="Timer" parent="HUD2"]
+
+[node name="Label" type="Label" parent="HUD2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 20.0
+custom_fonts/font = ExtResource( 7 )
+text = "10"
+align = 1
+
+[node name="text1" type="Label" parent="HUD2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+custom_fonts/font = ExtResource( 7 )
+text = "Player one: "
+
+[node name="text2" type="Label" parent="HUD2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 20.0
+margin_right = -50.0
+custom_fonts/font = ExtResource( 7 )
+text = "player two: "
+align = 2
+
+[node name="Button" type="Button" parent="HUD2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -50.0
+margin_right = 150.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 7 )
+text = "Start"
+
+[node name="MapToggle" type="Button" parent="HUD2"]
+margin_left = 415.0
+margin_top = 375.0
+margin_right = 601.0
+margin_bottom = 395.0
+custom_fonts/font = SubResource( 5 )
+text = "Switch Map"
+
+[node name="Message" type="Label" parent="HUD2"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -100.0
+margin_bottom = 7.0
+custom_fonts/font = ExtResource( 7 )
+text = "Gravity Gauntlet"
+align = 1
+
+[node name="Start_Buffer" type="Timer" parent="HUD2"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Clear_Text" type="Timer" parent="HUD2"]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="timeout" from="RotationTimer" to="." method="_on_RotationTimer_timeout"]
 [connection signal="timeout" from="HUD/Timer" to="HUD" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Deathzone" to="." method="_on_Deathzone_body_entered"]
 [connection signal="timeout" from="ExclaimTimer" to="." method="_on_ExclaimTimer_timeout"]
+[connection signal="timeout" from="HUD2/Timer" to="HUD2" method="_on_Timer_timeout"]
+[connection signal="pressed" from="HUD2/Button" to="HUD2" method="_on_Button_pressed"]
+[connection signal="timeout" from="HUD2/Start_Buffer" to="HUD2" method="_on_Start_Buffer_timeout"]
+[connection signal="timeout" from="HUD2/Clear_Text" to="HUD2" method="_on_Clear_Text_timeout"]

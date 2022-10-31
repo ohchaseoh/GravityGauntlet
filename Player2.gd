@@ -11,6 +11,9 @@ export var player_num = 2
 
 func getBall():
 	return $RigidBody
+	
+func getPhysPlayer():
+	return $PhysPlayer
 
 func _physics_process(delta):
 	
