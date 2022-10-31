@@ -27,10 +27,8 @@ exclaim_scene = ExtResource( 8 )
 transform = Transform( 0.836568, 0, 0, 0, 0.836568, 0, 0, 0, 0.836568, 0, 1.60688, 0.172068 )
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 2.09559, -2.16345, 0 )
 
 [node name="Player2" parent="." instance=ExtResource( 3 )]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -2.12874, 0, 0 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.836568, 0, 0, 0, 0.758188, 0.353549, 0, -0.353549, 0.758188, 0, 0.0419828, 8 )
@@ -159,15 +157,17 @@ shape = SubResource( 1 )
 
 [node name="RotationTimer" type="Timer" parent="."]
 wait_time = 10.0
-autostart = true
 
 [node name="HUD" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 
+[node name="Panel" type="Panel" parent="HUD"]
+anchor_right = 1.0
+margin_bottom = 70.0
+
 [node name="Timer" type="Timer" parent="HUD"]
-autostart = true
 
 [node name="Label" type="Label" parent="HUD"]
 anchor_right = 1.0
@@ -177,6 +177,53 @@ custom_fonts/font = ExtResource( 4 )
 text = "10"
 align = 1
 
+[node name="text1" type="Label" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+custom_fonts/font = ExtResource( 4 )
+text = "Player one: "
+
+[node name="text2" type="Label" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 20.0
+margin_right = -50.0
+custom_fonts/font = ExtResource( 4 )
+text = "player two: "
+align = 2
+
+[node name="Button" type="Button" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -50.0
+margin_right = 150.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 4 )
+text = "Start"
+
+[node name="Message" type="Label" parent="HUD"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -100.0
+margin_bottom = 7.0
+custom_fonts/font = ExtResource( 4 )
+text = "Gravity Gauntlet"
+align = 1
+
+[node name="Start_Buffer" type="Timer" parent="HUD"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Clear_Text" type="Timer" parent="HUD"]
+wait_time = 2.0
+one_shot = true
+
 [node name="Deathzone" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0 )
 
@@ -185,12 +232,21 @@ shape = SubResource( 4 )
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+volume_db = -4.333
 autoplay = true
+
 
 [node name="ExclaimTimer" type="Timer" parent="."]
 wait_time = 0.3
 
+[connection signal="game_over" from="." to="HUD" method="_on_Main_game_over"]
+[connection signal="player_pos" from="." to="Camera" method="_on_Main_player_pos"]
 [connection signal="timeout" from="RotationTimer" to="." method="_on_RotationTimer_timeout"]
 [connection signal="timeout" from="HUD/Timer" to="HUD" method="_on_Timer_timeout"]
+[connection signal="pressed" from="HUD/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="HUD/Button" to="HUD" method="_on_Button_pressed"]
+[connection signal="timeout" from="HUD/Start_Buffer" to="." method="_on_Start_Buffer_timeout"]
+[connection signal="timeout" from="HUD/Start_Buffer" to="HUD" method="_on_Start_Buffer_timeout"]
+[connection signal="timeout" from="HUD/Clear_Text" to="HUD" method="_on_Clear_Text_timeout"]
 [connection signal="body_entered" from="Deathzone" to="." method="_on_Deathzone_body_entered"]
 [connection signal="timeout" from="ExclaimTimer" to="." method="_on_ExclaimTimer_timeout"]
